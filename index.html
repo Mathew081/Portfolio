@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A modern, responsive personal portfolio template." />
+    <title>Curt Mathew Gutierrez — Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: { ink: '#292929', paper: '#FAF9F6', ash: '#a9a8a4', stone: '#dedbd4' },
+            fontFamily: { display: ['Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+            boxShadow: { soft: '0 20px 60px rgba(0,0,0,.12)' }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body { font-family: 'DM Sans', sans-serif; background: #FAF9F6; color: #292929; }
+      .font-display { font-family: 'Instrument Serif', Georgia, serif; }
+      .font-mono { font-family: 'DM Mono', monospace; }
+      .grid-pattern { background-image: radial-gradient(circle at 1px 1px, rgba(11,13,16,.1) 1px, transparent 0); background-size: 18px 18px; }
+      .noise:after { content:''; position:absolute; inset:0; pointer-events:none; opacity:.05; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E"); }
+      .project-card { transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+      .project-card:hover { transform: translateY(-8px); box-shadow: 0 22px 35px rgba(11,13,16,.12); }
+      .project-card img { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+      .project-card:hover img { transform: scale(1.055); }
+      .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .filter-btn.active { background:#292929; color:#FAF9F6; }
+      .nav-link::after { content:''; display:block; width:0; height:1px; margin-top:3px; background:currentColor; transition:width .25s; }
+      .nav-link:hover::after { width:100%; }
+      .glass-nav { background:rgba(250,249,246,.58); box-shadow:0 1px 18px rgba(41,41,41,.02); }
+      .hero-art { clip-path: polygon(0 4%, 100% 0, 97% 97%, 3% 100%); }
+      .image-tile { transition: transform .5s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
+      .image-tile:hover { transform: rotate(0deg) translateY(-8px) !important; filter: saturate(1.15); }
+      .hero-title { animation: hero-fade .95s cubic-bezier(.2,.7,.2,1) both; }
+      @keyframes hero-fade { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      .cmg-scene { background-image: linear-gradient(90deg, rgba(20,20,20,.62), rgba(20,20,20,.08)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1800&q=85'); background-position: center; background-size: 100%; transition: background-size 1s cubic-bezier(.2,.7,.2,1), filter .8s ease; }
+      .cmg-scene::before { content:''; position:absolute; inset:-30%; background: repeating-linear-gradient(115deg, transparent 0 30px, rgba(255,255,255,.12) 31px 33px, transparent 34px 72px); transform: translateX(-70%); opacity:0; transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity .3s; }
+      .cmg-scene::after { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 55%); transform: translateX(-120%); mix-blend-mode:soft-light; }
+      .cmg-project:hover .cmg-scene { background-size: 113%; filter: saturate(.8) contrast(1.12); }
+      .cmg-project:hover .cmg-scene::before { transform: translateX(70%); opacity:1; }
+      .cmg-project:hover .cmg-scene::after { animation: sheen 1.2s ease; }
+      @keyframes sheen { to { transform: translateX(120%); } }
+      #tech-stack article span { border: 1px solid rgba(41,41,41,.16); border-radius: 9999px; background:#FAF9F6; padding: .45rem .7rem; font-size: .8rem; line-height: 1; }
+      #tech-stack article span:hover { background: #292929; border-color: #292929; color: #FAF9F6; }
+      .social-capsule { position:relative; display:inline-flex; min-height:2.85rem; align-items:center; justify-content:center; gap:.65rem; padding:.7rem 1rem; border:1px solid rgba(41,41,41,.2); border-radius:9999px; background:#FAF9F6; color:#292929; font-size:.82rem; font-weight:500; transition:transform .25s ease, background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+      .social-capsule::after { content:attr(data-label); position:absolute; bottom:calc(100% + .65rem); left:50%; z-index:5; transform:translate(-50%, .35rem); border-radius:9999px; background:#292929; padding:.4rem .65rem; color:#FAF9F6; font-family:'DM Mono', monospace; font-size:.62rem; letter-spacing:.06em; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease; white-space:nowrap; }
+      .social-capsule:hover, .social-capsule:focus-visible { transform:translateY(-4px); border-color:#292929; background:#292929; color:#FAF9F6; box-shadow:0 8px 18px rgba(41,41,41,.12); }
+      .social-capsule:hover::after, .social-capsule:focus-visible::after { opacity:1; transform:translate(-50%, 0); }
+      .social-capsule:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+      .social-capsule svg { width:1rem; height:1rem; flex:none; }
+      html.dark .contact-panel, html.dark #tech-stack article, html.dark .cmg-project { background:#1f1f1f!important; border-color:rgba(250,249,246,.14)!important; }
+      html.dark .social-capsule { background:#252525; color:#FAF9F6; border-color:rgba(250,249,246,.22); }
+      html.dark .social-capsule:hover, html.dark .social-capsule:focus-visible { background:#FAF9F6; color:#292929; border-color:#FAF9F6; }
+      html.dark .social-capsule::after { background:#FAF9F6; color:#292929; }
+      html.dark body { background:#1f1f1f; color:#FAF9F6; }
+      html.dark header { background:rgba(31,31,31,.84); border-color:rgba(244,241,235,.14); }
+      html.dark .bg-paper { background-color:#292929; }
+      html.dark .text-ink { color:#FAF9F6; }
+      html.dark [class~="text-ink/55"], html.dark [class~="text-ink/60"], html.dark [class~="text-ink/50"] { color:rgba(250,249,246,.58)!important; }
+      html.dark [class~="border-ink/15"], html.dark [class~="border-ink/20"] { border-color:rgba(250,249,246,.18)!important; }
+      
+      html.dark #tech-stack article span { background:#252525; border-color:rgba(250,249,246,.18); }
+      html.dark .filter-btn.active, html.dark #tech-stack article span:hover { background:#FAF9F6; border-color:#FAF9F6; color:#292929; }
+      @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; } }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <div class="fixed inset-x-0 top-0 z-50 h-1 bg-ink/10"><div id="progress" class="h-full w-0 bg-ink transition-[width] duration-150"></div></div>
+
+    <header class="glass-nav fixed inset-x-0 top-0 z-40 grid grid-cols-[1fr_auto] items-center px-5 py-3 backdrop-blur-xl sm:px-8 lg:grid-cols-[1fr_auto_1fr] lg:px-10">
+      <a href="#top" class="group flex items-center gap-2 font-semibold tracking-tight" aria-label="Curt Mathew Gutierrez home"><span class="text-lg">C<span class="text-ash">/</span>G</span><span class="hidden text-xs uppercase tracking-[.15em] sm:inline">Curt Mathew Gutierrez</span></a>
+      <p class="hidden font-mono text-xs text-ink/60 lg:block">Web developer · turning ideas into code</p>
+      <div class="ml-auto flex items-center gap-2"><nav class="hidden items-center gap-3 text-sm font-medium md:flex" aria-label="Main navigation"><a href="#about" class="rounded-full border border-ink/20 px-4 py-2 transition hover:border-ink">About</a><a href="#contact" class="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-ink/80">Start a project <span aria-hidden="true">↗</span></a></nav><button id="theme-toggle" class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 transition hover:border-ink" aria-label="Switch to dark mode" title="Toggle dark mode"><i data-lucide="moon" class="h-4 w-4"></i></button><button id="menu-button" class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 md:hidden" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" class="h-5 w-5"></i></button></div>
+    </header>
+    <div id="mobile-menu" class="fixed inset-0 z-30 hidden bg-paper px-6 pt-28 md:hidden">
+      <nav class="flex flex-col gap-6 text-4xl font-display italic" aria-label="Mobile navigation">
+        <a href="#work">Projects</a><a href="#about">About</a><a href="#tech-stack">Tech stack</a><a href="#contact">Let's talk ↗</a>
+      </nav>
+    </div>
+
+    <main id="top" class="pt-16">
+      <section class="relative mx-auto max-w-7xl overflow-hidden px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-20 lg:px-10">
+        <div class="noise grid-pattern absolute inset-x-5 top-10 -z-10 h-64 rounded-[2.5rem] opacity-35 sm:inset-x-8 lg:inset-x-10"></div>
+        <h1 class="hero-title mx-auto mt-6 max-w-5xl font-display font-normal text-[clamp(4.5rem,11vw,9rem)] leading-[.8] tracking-[-.055em]">Turning ideas<br><span class="italic">into code.</span></h1>
+        <p class="reveal mx-auto mt-7 max-w-lg text-base leading-relaxed text-ink/65 sm:text-lg">I’m Curt Mathew Gutierrez, a web developer creating thoughtful, responsive digital experiences for the web.</p>
+        <div class="reveal mt-7 flex flex-col items-center gap-3"><a href="#contact" class="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-paper px-5 py-3 font-mono text-xs shadow-sm transition hover:-translate-y-1 hover:border-ink">Available for opportunities <span>↗</span></a><a href="#work" class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[.14em] text-paper transition hover:-translate-y-1 hover:bg-ink/80">Explore the work <i data-lucide="arrow-down" class="h-3.5 w-3.5"></i></a></div>
+      </section>
+
+      <section id="work" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div class="reveal mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div><p class="font-mono text-xs uppercase tracking-[.16em] text-ink/55">01 — Selected work</p><h2 class="mt-3 font-display text-5xl tracking-tight sm:text-6xl">Projects.</h2></div>
+          <p class="max-w-xs text-sm leading-relaxed text-ink/60">A selection of digital experiences built with care and purpose.</p>
+        </div>
+        <article class="cmg-project project-card reveal overflow-hidden rounded-2xl border border-ink/10 bg-[#FAF9F6] p-3">
+          <a href="https://cmg-auto-revival-system.vercel.app/" target="_blank" rel="noreferrer" class="group block" aria-label="Open CMG Auto Revival project">
+            <div class="cmg-scene relative grid aspect-[16/9] overflow-hidden rounded-xl p-5 text-paper sm:p-8">
+              <div class="relative z-10 self-start"><p class="font-mono text-[10px] uppercase tracking-[.2em] text-paper/70">Mobile auto detailing</p><h3 class="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl">CMG Auto Revival</h3></div>
+              <div class="relative z-10 self-end flex items-end justify-between"><p class="max-w-xs text-sm leading-relaxed text-paper/75">A sharp, conversion-focused website for a mobile auto-detailing service.</p><span class="grid h-11 w-11 place-items-center rounded-full border border-paper/50 bg-paper/10 backdrop-blur-sm transition group-hover:scale-110"><i data-lucide="arrow-up-right" class="h-5 w-5"></i></span></div>
+            </div>
+            <div class="flex flex-col gap-3 px-2 pb-2 pt-5 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="text-xl font-semibold">CMG Auto Revival</h3><p class="mt-1 text-sm text-ink/60">Web design · Responsive development · Booking flow</p></div><p class="font-mono text-xs text-ink/55">LIVE SITE ↗</p></div>
+          </a>
+        </article>
+      </section>
+
+      <section id="about" class="bg-ink text-paper">
+        <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-24 lg:px-10 lg:py-28">
+          <div class="reveal"><p class="font-mono text-xs uppercase tracking-[.16em] text-paper/50">02 — About me</p><div class="mt-8 aspect-[4/5] overflow-hidden rounded-2xl bg-[#8a8985]"><img class="h-full w-full object-cover grayscale" src="mypic.png" alt="Portrait of Curt Mathew Gutierrez" /></div><div class="mt-4 flex flex-wrap gap-2"><a href="CurtMathewGutierrez_résumé.pdf" download class="inline-flex items-center gap-2 rounded-full border border-paper/30 px-4 py-2.5 text-sm text-paper transition hover:bg-paper hover:text-ink">Download my résumé <i data-lucide="download" class="h-4 w-4"></i></a><a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKkVJzHbCLkgzqmlndplTNSfQRXLJlKSbQcfpzcmnlgvjcKwzxXnGNSHzbGMhmRCRZgsBjw" class="inline-flex items-center gap-2 rounded-full border border-paper/30 px-4 py-2.5 text-sm text-paper transition hover:bg-paper hover:text-ink">curtgutz@gmail.com <i data-lucide="mail" class="h-4 w-4"></i></a></div></div>
+          <div class="reveal self-end"><h2 class="max-w-2xl font-display text-4xl leading-[.95] tracking-tight sm:text-5xl">Hello there!</h2><p class="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">I’m Curt Mathew Gutierrez, a web developer interested in building thoughtful business solutions and automation that make everyday work simpler, faster, and more reliable.</p><dl class="mt-10 max-w-2xl divide-y divide-paper/20 border-y border-paper/20"><div class="grid gap-2 py-5 sm:grid-cols-[9rem_1fr]"><dt class="font-mono text-[11px] uppercase tracking-[.14em] text-paper/45">Education</dt><dd class="text-paper/85">2022–2026 · Pampanga State University<br><span class="text-paper/55">BSIT, Cum Laude · Dean’s Lister</span></dd></div><div class="grid gap-2 py-5 sm:grid-cols-[9rem_1fr]"><dt class="font-mono text-[11px] uppercase tracking-[.14em] text-paper/45">Experience</dt><dd class="text-paper/85">Software Quality Assurance Analyst & Software Development Intern<br><span class="text-paper/55">Tarellia Solutions OPC · Feb 2026–May 2026</span></dd></div><div class="grid gap-2 py-5 sm:grid-cols-[9rem_1fr]"><dt class="font-mono text-[11px] uppercase tracking-[.14em] text-paper/45">Interests</dt><dd class="text-paper/85">Business solutions & automation</dd></div><div class="grid gap-2 py-5 sm:grid-cols-[9rem_1fr]"><dt class="font-mono text-[11px] uppercase tracking-[.14em] text-paper/45">I enjoy solving</dt><dd class="text-paper/85">Real-world workflow problems through practical, user-focused web applications that reduce manual work and simplify business operations.</dd></div></dl></div>
+        </div>
+      </section>
+
+      <section id="tech-stack" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div class="reveal mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p class="font-mono text-xs uppercase tracking-[.16em] text-ink/55">03 — Tech stack</p><h2 class="mt-3 font-display text-5xl tracking-tight sm:text-6xl">Tools I work with.</h2></div><p class="max-w-xs text-sm leading-relaxed text-ink/60">A practical toolkit for building polished, useful web experiences.</p></div>
+        <div class="reveal grid gap-3 sm:grid-cols-2">
+          <article class="rounded-2xl border border-ink/15 bg-[#FAF9F6] p-6 sm:p-8"><p class="font-mono text-[11px] uppercase tracking-[.16em] text-ink/50">01 — Languages</p><div class="mt-8 flex flex-wrap gap-2"><span>Python</span><span>JavaScript</span><span>PHP</span><span>Java</span><span>C++</span><span>SQL</span><span>HTML</span><span>CSS</span></div></article>
+          <article class="rounded-2xl border border-ink/15 bg-[#FAF9F6] p-6 sm:p-8"><p class="font-mono text-[11px] uppercase tracking-[.16em] text-ink/50">02 — Frameworks & Libraries</p><div class="mt-8 flex flex-wrap gap-2"><span>Express.js</span><span>Tailwind CSS</span><span>Bootstrap</span><span>Vanilla JS</span><span>Laravel</span><span>BeautifulSoup</span><span>FastAPI</span><span>Requests</span></div></article>
+          <article class="rounded-2xl border border-ink/15 bg-[#FAF9F6] p-6 sm:p-8"><p class="font-mono text-[11px] uppercase tracking-[.16em] text-ink/50">03 — Runtime & Build Tools</p><div class="mt-8 flex flex-wrap gap-2"><span>Node.js</span></div></article>
+          <article class="rounded-2xl border border-ink/15 bg-[#FAF9F6] p-6 sm:col-span-2 sm:p-8"><p class="font-mono text-[11px] uppercase tracking-[.16em] text-ink/50">04 — Tools & Software</p><div class="mt-8 flex flex-wrap gap-2"><span>n8n</span><span>Visual Studio Code</span><span>Git</span><span>GitHub</span><span>MySQL Workbench</span><span>Canva</span><span>Microsoft Office</span><span>Figma</span><span>Google Workspace</span><span>Microsoft Azure</span><span>Vercel</span><span>Docker</span><span>Oracle</span><span>Cisco Packet Tracer</span><span>B4a</span></div></article>
+        </div>
+      </section>
+
+      <section id="contact" class="px-5 pb-5 sm:px-8 lg:px-10">
+        <div class="contact-panel noise relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-ink/10 bg-[#FAF9F6] px-6 py-16 sm:px-12 sm:py-24 lg:px-20 lg:py-28">
+          <p class="reveal font-mono text-xs uppercase tracking-[.16em] text-ink/65">04 — Get in touch</p>
+          <h2 class="reveal mt-5 max-w-4xl font-display text-6xl leading-[.9] tracking-[-.04em] sm:text-8xl lg:text-9xl">Have a project in mind?<br><a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjDTKjflwXgVTDTnRdKnqNwQgHqrrWKlfjLZPkxppxvpHgNhFJcMRRMgmwPvnGctdQMjfh" class="inline-block border-b-2 border-ink pb-2 italic transition hover:translate-x-3">Let’s build it.</a></h2>
+          <div class="reveal mt-14 flex flex-col gap-8 border-t border-ink/20 pt-6 sm:flex-row sm:items-end sm:justify-between">
+            <div><p class="font-mono text-[11px] uppercase tracking-[.14em] text-ink/55">Have a conversation</p><p class="mt-2 text-sm text-ink/70">I’m open to opportunities, collaborations, and interesting projects.</p></div>
+            <div class="flex flex-wrap gap-3" aria-label="Social and contact links">
+              <a class="social-capsule" data-label="Gmail" aria-label="Email Curt via Gmail" href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjDTKjflwXgVTDTnRdKnqNwQgHqrrWKlfjLZPkxppxvpHgNhFJcMRRMgmwPvnGctdQMjfh"><i data-lucide="mail" aria-hidden="true"></i><span>Gmail</span></a>
+              <a class="social-capsule" data-label="LinkedIn" aria-label="Curt on LinkedIn" href="https://www.linkedin.com/in/curt-mathew-gutierrez-54a245369/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V8.99h3.56v11.46ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg><span>LinkedIn</span></a>
+              <a class="social-capsule" data-label="GitHub" aria-label="Curt on GitHub" href="https://github.com/Mathew081" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.06 3.47 1.56.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.04-1.14 3.04-1.14.61 1.54.23 2.68.12 2.96.71.78 1.14 1.78 1.14 3 0 4.3-2.61 5.24-5.1 5.52.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg><span>GitHub</span></a>
+              <a class="social-capsule" data-label="Facebook" aria-label="Curt on Facebook" href="https://www.facebook.com/curtmathew.gutierrez/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14c-.3-.04-1.34-.14-2.55-.14-2.52 0-4.25 1.54-4.25 4.37V9.6H7.14v3.2h2.85V21h3.51Z"/></svg><span>Facebook</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-8 text-xs text-ink/55 sm:flex-row sm:justify-between sm:px-8 lg:px-10"><p>© <span id="year"></span> Curt Mathew Gutierrez. All rights reserved.</p><p>Turning ideas into code.</p></footer>
+
+    <script>
+      lucide.createIcons();
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const themeButton = document.getElementById('theme-toggle');
+      const applyTheme = (isDark) => { document.documentElement.classList.toggle('dark', isDark); themeButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode'); themeButton.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode'); themeButton.innerHTML = `<i data-lucide="${isDark ? 'sun' : 'moon'}" class="h-4 w-4"></i>`; lucide.createIcons(); };
+      applyTheme(false);
+      themeButton.addEventListener('click', () => { applyTheme(!document.documentElement.classList.contains('dark')); });
+      const menuButton = document.getElementById('menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const toggleMenu = () => { const isOpen = !mobileMenu.classList.contains('hidden'); mobileMenu.classList.toggle('hidden'); menuButton.setAttribute('aria-expanded', String(!isOpen)); document.body.classList.toggle('overflow-hidden', !isOpen); menuButton.innerHTML = isOpen ? '<i data-lucide="menu" class="h-5 w-5"></i>' : '<i data-lucide="x" class="h-5 w-5"></i>'; lucide.createIcons(); };
+      menuButton.addEventListener('click', toggleMenu);
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { if (!mobileMenu.classList.contains('hidden')) toggleMenu(); }));
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      const filters = document.querySelectorAll('.filter-btn');
+      const projects = document.querySelectorAll('[data-category]');
+      filters.forEach(button => button.addEventListener('click', () => { const filter = button.dataset.filter; filters.forEach(b => b.classList.toggle('active', b === button)); projects.forEach(card => { const show = filter === 'all' || card.dataset.category.includes(filter); card.classList.toggle('hidden', !show); }); }));
+      const progress = document.getElementById('progress');
+      window.addEventListener('scroll', () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`; }, { passive: true });
+    </script>
+  </body>
+</html>
